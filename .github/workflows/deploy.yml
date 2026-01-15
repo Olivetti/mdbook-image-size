@@ -11,10 +11,10 @@ on:
         description: 'Log level'
         required: true
         default: 'warning'
-      environment:
-        description: 'Environment to deploy'
-        required: false
-        default: 'staging'
+#      environment:
+#        description: 'Environment to deploy'
+#        required: false
+#        default: 'staging'
 
 #on:
 #  push:
@@ -57,19 +57,6 @@ jobs:
       - name: Setup | musl tools
         if: matrix.target == 'x86_64-unknown-linux-musl'
         run: sudo apt install -y musl-tools
-
-      - name: Setup | musl cross-compile
-        if: matrix.target == 'aarch64-unknown-linux-musl'
-        run: |
-          pushd /tmp
-          wget https://github.com/musl-cross/musl-cross/releases/download/20241103/aarch64-unknown-linux-musl.tar.xz
-          tar -xf aarch64-unknown-linux-musl.tar.xz
-          echo "d3c597e89f4b87f78d473f1f6a539ed817afbce9b73a02dd123c6d5c4e43f617 *aarch64-unknown-linux-musl.tar.xz" | sha256sum -c -
-          ccpath=$(realpath $(find . -name aarch64-unknown-linux-musl-cc))
-          popd
-          mkdir .cargo
-          echo "[target.aarch64-unknown-linux-musl]" > .cargo/config.toml
-          printf 'linker = "%s"\n' "$ccpath" >> .cargo/config.toml
 
       - name: Build | Build
         run: cargo build --release --target ${{ matrix.target }}
