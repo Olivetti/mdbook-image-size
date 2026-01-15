@@ -16,10 +16,10 @@ on:
         required: false
         default: 'staging'
 
-on:
-  push:
-    tags:
-      - "*"
+#on:
+#  push:
+#    tags:
+#      - "*"
 
 env:
   CRATE_NAME: mdbook-image-size
