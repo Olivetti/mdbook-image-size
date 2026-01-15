@@ -11,10 +11,11 @@ on:
         description: 'Log level'
         required: true
         default: 'warning'
-#      environment:
-#        description: 'Environment to deploy'
-#        required: false
-#        default: 'staging'
+      environment:
+        description: 'Environment to deploy'
+        required: false
+        default: 'staging'
+        CRATE_NAME: mdbook-image-size
 
 #on:
 #  push:
@@ -72,15 +73,6 @@ jobs:
 
           echo "tag=$tag" >> $GITHUB_OUTPUT
         id: extract_tag
-
-      - name: Post Setup | Prepare artifacts [Windows]
-        if: matrix.os == 'windows-latest'
-        run: |
-          mkdir target/stage
-          cd target/${{ matrix.target }}/release
-          strip ${{ env.CRATE_NAME }}.exe
-          7z a ../../stage/${{ env.CRATE_NAME }}-${{ steps.extract_tag.outputs.tag }}-${{ matrix.name }} ${{ env.CRATE_NAME }}.exe
-          cd -
 
       - name: Post Setup | Prepare artifacts [-nix]
         if: matrix.os != 'windows-latest'
