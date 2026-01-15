@@ -1,6 +1,6 @@
 ﻿# mdbook-image-size
 
-A mdbook preprocessor which support image size syntax
+A mdbook preprocessor which support image size syntax.
 
 ## size
 
