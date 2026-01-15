@@ -1,6 +1,6 @@
 [package]
 name = "mdbook-image-size"
-version = "0.3.0"
+version = "0.2.2"
 edition = "2021"
 authors = ["George Liu <39660787@qq.com>"]
 license = "MIT"
